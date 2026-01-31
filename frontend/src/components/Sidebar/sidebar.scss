@@ -1,0 +1,76 @@
+@use "/src/styles/vars";
+
+.sidebar {
+	border-radius: 20px;
+	background: vars.$accent-color;
+	height: calc(100vh - 40px);
+	width: 270px;
+
+	&.closed {
+		width: 90px;
+
+		.sidebar__top {
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		p {
+			display: none;
+		}
+
+		.sidebar__account {
+			margin-top: 0;
+		}
+	}
+
+	&__expand {
+		display: flex;
+	}
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 5px;
+		padding: 20px 30px;
+		border-bottom: 1px solid #d3d3d3;
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 24px;
+	}
+
+	&__nav {
+		margin-top: 35px;
+	}
+
+	&__item {
+		&--active {
+			background: #dfe0e2;
+			font-weight: 700;
+			color: vars.$color-blue;
+		}
+	}
+
+	&__link {
+		padding: 15px 35px;
+		display: flex;
+		align-items: center;
+		gap: 19px;
+	}
+
+	&__account {
+		margin-top: 30px;
+	}
+
+	&__account-title {
+		font-weight: 700;
+		padding: 15px 35px;
+	}
+
+	&__bottom {
+	}
+}

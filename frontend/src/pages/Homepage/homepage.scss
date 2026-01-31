@@ -1,0 +1,18 @@
+@use "/src/styles/vars";
+
+.homepage {
+	flex: 1;
+	margin-top: 15px;
+}
+
+.homepage__top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.homepage__welcome {
+	font-weight: 700;
+	font-size: 13px;
+	color: vars.$red-color;
+}
