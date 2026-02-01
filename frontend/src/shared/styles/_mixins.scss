@@ -1,0 +1,37 @@
+// MEDIA QUERIES
+@mixin md {
+	@media (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin sm {
+	@media (max-width: 640px) {
+		@content;
+	}
+}
+
+@mixin vsm {
+	@media (max-width: 475px) {
+		@content;
+	}
+}
+
+// COMPONENTS
+
+@mixin sidebar-closed {
+	width: 90px;
+
+	.sidebar__top {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	p {
+		display: none;
+	}
+
+	.sidebar__account {
+		margin-top: 0;
+	}
+}

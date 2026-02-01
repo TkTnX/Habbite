@@ -1,3 +1,5 @@
+import { Analytics } from "../../components"
+import { ThemeChange } from "../../features"
 import "./homepage.scss"
 export const Homepage = () => {
 	return (
@@ -8,7 +10,9 @@ export const Homepage = () => {
 					<p className='homepage__welcome'>Добрый день John,</p>
 					<p>Как вы сегодня?</p>
 				</div>
+				<ThemeChange />
 			</div>
+			<Analytics />
 		</section>
 	)
 }

@@ -1,0 +1,43 @@
+@use "../../shared/styles/vars";
+@use "../../shared/styles/mixins";
+
+.themeChange {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+
+	&__button {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		p {
+			font-size: 10px;
+		}
+	}
+
+	&__switch {
+		.MuiSwitch-thumb {
+			background: vars.$text-color;
+		}
+
+		.css-tj8d99-MuiSwitch-track {
+			opacity: 1;
+			background: #e2e2f2;
+		}
+		.css-aqlqb4-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked
+			+ .MuiSwitch-track {
+			background: vars.$text-color;
+		}
+	}
+
+	@include mixins.md {
+		gap: 5px;
+	}
+
+	@include mixins.vsm {
+		p {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,14 @@
+.analytics {
+	margin-top: 20px;
+	&__title {
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	&__list {
+		margin-top: 10px;
+		display: flex;
+		align-items: stretch;
+		gap: 20px;
+	}
+}

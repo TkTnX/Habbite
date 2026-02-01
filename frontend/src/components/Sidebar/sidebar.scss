@@ -1,4 +1,5 @@
-@use "/src/styles/vars";
+@use "/src/shared/styles/vars";
+@use "/src/shared/styles/mixins";
 
 .sidebar {
 	border-radius: 20px;
@@ -7,20 +8,7 @@
 	width: 270px;
 
 	&.closed {
-		width: 90px;
-
-		.sidebar__top {
-			flex-direction: column;
-			gap: 20px;
-		}
-
-		p {
-			display: none;
-		}
-
-		.sidebar__account {
-			margin-top: 0;
-		}
+		@include mixins.sidebar-closed;
 	}
 
 	&__expand {
@@ -71,6 +59,36 @@
 		padding: 15px 35px;
 	}
 
-	&__bottom {
+	@include mixins.md {
+		@include mixins.sidebar-closed;
+		.sidebar__expand {
+			display: none;
+		}
+	}
+
+	@include mixins.vsm {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+		width: unset;
+		height: unset;
+		.sidebar__top {
+			display: none;
+		}
+
+		.sidebar__nav {
+			display: flex;
+			margin-top: 0;
+			justify-content: center;
+		}
+		.sidebar__list {
+			display: flex;
+		}
+
+		.sidebar__item a {
+			padding: 20px;
+		}
 	}
 }
