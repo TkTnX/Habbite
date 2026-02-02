@@ -3,6 +3,8 @@
 
 .sidebar {
 	border-radius: 20px;
+	position: sticky;
+	top: 20px;
 	background: vars.$accent-color;
 	height: calc(100vh - 40px);
 	width: 270px;

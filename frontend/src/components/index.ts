@@ -1,3 +1,5 @@
 export * from './UserPreview'
 export * from './Sidebar'
 export * from './Analytics'
+export * from './WaterAnalytics'
+export * from './WeightAnalytics'

@@ -3,6 +3,7 @@ import "./analyticDiagram.scss"
 import { areaElementClasses, SparkLineChart } from "@mui/x-charts"
 import { getDaysInMonth } from "../../../shared"
 import { AreaGradient } from "../AreaGradient"
+import { Plus } from "lucide-react"
 
 interface Props {
 	title: string
@@ -15,10 +16,17 @@ export const AnalyticDiagram = ({ title, period, data, color }: Props) => {
 	return (
 		<Card className='analyticDiagram' variant={"outlined"}>
 			<CardContent>
-				<Typography component='h3' gutterBottom>
-					{title}
-				</Typography>
-				<Typography variant='caption'>{period}</Typography>
+				<div className='analyticDiagram__top'>
+					<div>
+						<Typography component='h3' gutterBottom>
+							{title}
+						</Typography>
+						<Typography variant='caption'>{period}</Typography>
+					</div>
+					<button>
+						<Plus />
+					</button>
+				</div>
 				<Box>
 					<SparkLineChart
 						height={250}

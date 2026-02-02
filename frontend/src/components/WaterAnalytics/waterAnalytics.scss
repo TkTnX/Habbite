@@ -1,0 +1,20 @@
+.waterAnalytics {
+	margin-top: 50px;
+
+	&__list {
+		display: flex;
+		align-items: stretch;
+		margin-top: 10px;
+		gap: 20px;
+
+		.analyticGridDiagram {
+			flex: 66%;
+		}
+
+		.analyticRoundDiagram {
+			flex: 33%;
+		}
+	}
+
+
+}

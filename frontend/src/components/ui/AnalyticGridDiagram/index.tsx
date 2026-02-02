@@ -1,6 +1,7 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material"
 import "./analyticGridDiagram.scss"
 import { BarChart } from "@mui/x-charts"
+import { Plus } from "lucide-react"
 
 interface Props {
 	title: string
@@ -13,20 +14,27 @@ export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
 		.getPropertyValue("--color-blue")
 		.trim()
 	return (
-		<Card className="analyticGridDiagram" variant='outlined'>
+		<Card className='analyticGridDiagram' variant='outlined'>
 			<CardContent>
-				<Typography component='h3' gutterBottom>
-					{title}
-				</Typography>
+				<div className='analyticDiagram__top'>
+					<div>
+						<Typography component='h3' gutterBottom>
+							{title}
+						</Typography>
+						<Stack sx={{ justifyContent: "space-between" }}>
+							<Typography
+								variant='caption'
+								sx={{ color: "text.secondary" }}
+							>
+								{description}
+							</Typography>
+						</Stack>
+					</div>
+					<button>
+						<Plus />
+					</button>
+				</div>
 
-				<Stack sx={{ justifyContent: "space-between" }}>
-					<Typography
-						variant='caption'
-						sx={{ color: "text.secondary" }}
-					>
-						{description}
-					</Typography>
-				</Stack>
 				<BarChart
 					borderRadius={8}
 					colors={[blueColor]}

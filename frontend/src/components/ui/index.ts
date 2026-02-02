@@ -1,3 +1,5 @@
 export * from './AnalyticDiagram'
 export * from './AreaGradient'
 export * from './AnalyticGridDiagram'
+export * from './AnalyticRoundDiagram'
+export * from './BMI'

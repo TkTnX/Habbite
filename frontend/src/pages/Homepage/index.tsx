@@ -1,9 +1,9 @@
-import { Analytics } from "../../components"
+import { Analytics, WaterAnalytics, WeightAnalytics } from "../../components"
 import { ThemeChange } from "../../features"
 import "./homepage.scss"
 export const Homepage = () => {
 	return (
-		<section className='homepage'>
+		<main className='homepage'>
 			{/* TODO: Высчитывать добрый день/утро/вечер/ночь */}
 			<div className='homepage__top'>
 				<div>
@@ -13,6 +13,8 @@ export const Homepage = () => {
 				<ThemeChange />
 			</div>
 			<Analytics />
-		</section>
+			<WaterAnalytics />
+			<WeightAnalytics />
+		</main>
 	)
 }

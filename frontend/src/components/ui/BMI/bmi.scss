@@ -1,0 +1,75 @@
+.bmi {
+	margin-top: 10px;
+	flex: 1;
+	&__line {
+		display: flex;
+		align-items: stretch;
+		border-radius: 15px;
+		width: fit-content;
+		position: relative;
+	}
+
+	&__gap {
+		height: 20px;
+		cursor: pointer;
+		transition: all 0.2s ease-in;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
+		&:hover {
+			opacity: 0.8;
+		}
+
+		p {
+			position: absolute;
+			bottom: -20px;
+		}
+
+		&-min {
+			left: -20px;
+		}
+
+		&-max {
+			right: 0;
+		}
+	}
+
+	&__marker {
+		position: absolute;
+		top: -8px;
+		width: 2px;
+		height: 40px;
+		background: #000;
+
+		&-num {
+			position: absolute;
+			bottom: -20px;
+			left: -10px;
+			font-weight: 600;
+			font-size: 18px;
+		}
+	}
+
+	&__info {
+		margin-top: 50px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		max-height: 250px;
+		overflow-y: auto;
+
+		&-title {
+			font-size: 18px;
+			font-weight: bold;
+		}
+		&-desc {
+			padding-top: 10px;
+			font-size: 14px;
+
+			span {
+				font-weight: bold;
+			}
+		}
+	}
+}
