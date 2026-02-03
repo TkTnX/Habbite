@@ -18,10 +18,8 @@ export async function register(req, res) {
 
 export async function login(req, res) {
   const { email, password } = req.body;
-  console.log(req.body);
   const user = await User.findOne({ email });
   if (!user) throw Error("Неверные почта или пароль!");
-  console.log({ userPass: user.password, password });
   const isPasswordCorrect = await argon.verify(user.password, password);
   if (!isPasswordCorrect) throw Error("Неверные почта или пароль!");
 
@@ -30,7 +28,7 @@ export async function login(req, res) {
 
 function generateTokens(user) {
   const payload = { userId: user._id, email: user.email };
-  console.log(process.env.JWT_SECRET_KEY);
+  
   const refreshToken = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
     algorithm: "HS256",
     expiresIn: "7d",
