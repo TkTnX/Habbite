@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: String,
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   avatar: String,
   password: String,
   provider: String,
@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["male", "female"],
   },
+  userDrinks: [{ type: Schema.Types.ObjectId, ref: "UserDrink" }],
 });
 
-export const User = mongoose.model("User", userSchema);
+export const User = model("User", userSchema);
