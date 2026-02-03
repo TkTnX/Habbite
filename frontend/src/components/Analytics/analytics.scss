@@ -1,3 +1,5 @@
+@use "/src/shared/styles/mixins";
+
 .analytics {
 	margin-top: 20px;
 	&__title {
@@ -10,5 +12,9 @@
 		display: flex;
 		align-items: stretch;
 		gap: 20px;
+
+		@include mixins.lg {
+			flex-direction: column;
+		}
 	}
 }

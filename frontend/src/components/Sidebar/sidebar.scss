@@ -5,7 +5,7 @@
 	border-radius: 20px;
 	position: sticky;
 	top: 20px;
-	background: vars.$accent-color;
+	background: var(--accent-color);
 	height: calc(100vh - 40px);
 	width: 270px;
 
@@ -41,7 +41,7 @@
 		&--active {
 			background: #dfe0e2;
 			font-weight: 700;
-			color: vars.$color-blue;
+			color: var(--color-blue);
 		}
 	}
 
@@ -76,6 +76,9 @@
 
 		width: unset;
 		height: unset;
+		top: unset;
+		z-index: 20;
+
 		.sidebar__top {
 			display: none;
 		}
@@ -92,5 +95,11 @@
 		.sidebar__item a {
 			padding: 20px;
 		}
+	}
+}
+
+body.dark {
+	.sidebar__link img {
+		filter: invert(0.4);
 	}
 }

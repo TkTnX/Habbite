@@ -2,7 +2,7 @@
 
 .userPreview {
 	width: 100%;
-	background: vars.$accent-color;
+	background: var(--accent-color);
 	padding: 20px 24px;
 	border-radius: 20px;
 	display: flex;

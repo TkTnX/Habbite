@@ -2,12 +2,17 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
 body {
-	font-family: vars.$font-family;
-	color: vars.$text-color;
-	font-size: vars.$font-size;
-	font-weight: vars.$font-weight;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	font-size: var(--font-size);
+	font-weight: var(--font-weight);
+	background: var(--bg-color);
 }
 
 a {
 	color: inherit;
+}
+
+.css-196bwzp-MuiPaper-root-MuiCard-root {
+	background: var(--bg-color) !important;
 }

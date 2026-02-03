@@ -1,15 +1,3 @@
-// FONTS
-$font-family: "Roboto", sans-serif;
-$font-size: 12px;
-$font-weight: 400;
-
-// COLORS
-$bg-color: #fff;
-$accent-color: #f7f7f7;
-$red-color: #f80d38;
-$text-color: #343434;
-$color-blue: #100db1;
-
 :root {
 	// FONTS
 	--font-family: "Roboto", sans-serif;
@@ -22,4 +10,10 @@ $color-blue: #100db1;
 	--red-color: #f80d38;
 	--text-color: #343434;
 	--color-blue: #100db1;
+}
+
+body.dark {
+	--bg-color: #050517;
+	--accent-color: #0c0c35;
+	--text-color: #fff;
 }

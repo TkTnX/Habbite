@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router/dom"
 import "./shared/styles/index.scss"
 import { Homepage } from "./pages"
 import { AppLayout } from "./layouts"
+import { createTheme, ThemeProvider } from "@mui/material"
 
 const router = createBrowserRouter([
 	{
@@ -19,8 +20,16 @@ const router = createBrowserRouter([
 	}
 ])
 
+const theme = createTheme({
+	colorSchemes: {
+		dark: true
+	}
+})
+
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<RouterProvider router={router} />
+		<ThemeProvider theme={theme}>
+			<RouterProvider router={router} />
+		</ThemeProvider>
 	</StrictMode>
 )

@@ -18,7 +18,7 @@
 
 	&__switch {
 		.MuiSwitch-thumb {
-			background: vars.$text-color;
+			background: var(--text-color);
 		}
 
 		.css-tj8d99-MuiSwitch-track {
@@ -27,7 +27,7 @@
 		}
 		.css-aqlqb4-MuiButtonBase-root-MuiSwitchBase-root-MuiSwitch-switchBase.Mui-checked
 			+ .MuiSwitch-track {
-			background: vars.$text-color;
+			background: var(--text-color);
 		}
 	}
 

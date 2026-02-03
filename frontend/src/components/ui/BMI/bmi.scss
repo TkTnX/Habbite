@@ -5,7 +5,7 @@
 		display: flex;
 		align-items: stretch;
 		border-radius: 15px;
-		width: fit-content;
+		width: 100%;
 		position: relative;
 	}
 
@@ -17,6 +17,7 @@
 		align-items: center;
 		justify-content: space-between;
 		position: relative;
+		flex-shrink: 0;
 		&:hover {
 			opacity: 0.8;
 		}
