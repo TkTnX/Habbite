@@ -17,7 +17,7 @@ app.listen(port, async (error) => {
   await mongoose
     .connect(process.env.DB_URL)
     .then(() => console.log("DB Connected!"));
-  console.log(`Server is running on  localhost:${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
 
 app.use("/auth", AuthRouter);
