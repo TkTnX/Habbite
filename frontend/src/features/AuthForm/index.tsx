@@ -1,20 +1,49 @@
 import "./authForm.scss"
-import { Link } from "react-router"
-import {
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	Input,
-	InputLabel
-} from "@mui/material"
+import { Link, useNavigate } from "react-router"
+import { Checkbox, FormControlLabel } from "@mui/material"
+import type {
+	UseMutationOptions,
+	UseMutationResult
+} from "@tanstack/react-query"
+import type { AxiosResponse } from "axios"
+import Cookies from "js-cookie"
+import { toast } from "react-toastify"
+import type { AuthAxiosError } from "../../shared"
+import { useState } from "react"
+import { FormInput } from "../../components/ui"
 
 interface Props {
 	type: "login" | "register"
+	mutation: (
+		options?: Omit<
+			UseMutationOptions<unknown, unknown, unknown, unknown>,
+			"mutationKey" | "mutationFn"
+		>
+	) => UseMutationResult<AxiosResponse, AuthAxiosError, any, unknown>
 }
 
-export const AuthForm = ({ type }: Props) => {
+export const AuthForm = ({ type, mutation }: Props) => {
+	const [isConfirmedTerms, setIsConfirmedTerms] = useState(false)
 	const isRegister = type === "register"
-    console.log(type)
+	const { mutate, isPending } = mutation()
+	const navigate = useNavigate()
+
+	const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		const formData = new FormData(e.target)
+		const body = Object.fromEntries(formData)
+		mutate(body, {
+			onSuccess: ({ data }) => {
+				;(Cookies.set("accessToken", data.accessToken), navigate("/"))
+			},
+			onError: error => {
+				const errorData = error.response?.data
+				errorData?.errors?.map((error: string) => toast.error(error)) ||
+					toast.error(errorData?.message)
+			}
+		})
+	}
+
 	return (
 		<div className='authForm'>
 			<div className='authForm__wrapper'>
@@ -22,31 +51,35 @@ export const AuthForm = ({ type }: Props) => {
 				<h4 className='authForm__title'>
 					{isRegister ? "Создание аккаунта" : "Логин"}
 				</h4>
-				<form className='authForm__form'>
+				<form onSubmit={e => onSubmit(e)} className='authForm__form'>
 					{isRegister && (
 						<>
-							<FormControl>
-								<InputLabel htmlFor='firstName'>Имя</InputLabel>
-								<Input id='firstName' />
-							</FormControl>
-							<FormControl>
-								<InputLabel htmlFor='lastName'>
-									Фамилия
-								</InputLabel>
-								<Input id='lastName' />
-							</FormControl>
+							<FormInput
+								disabled={isPending}
+								label={"Имя"}
+								name='firstName'
+							/>
+							<FormInput
+								disabled={isPending}
+								name='lastName'
+								label='Фамилия'
+							/>
 						</>
 					)}
-					<FormControl>
-						<InputLabel htmlFor='email'>Почта</InputLabel>
-						<Input id='email' />
-					</FormControl>
-					<FormControl>
-						<InputLabel htmlFor='password'>Пароль</InputLabel>
-						<Input id='password' />
-					</FormControl>
+					<FormInput
+						disabled={isPending}
+						name='email'
+						label='Почта'
+					/>
+					<FormInput
+						disabled={isPending}
+						name='password'
+						label='Пароль'
+					/>
 					{isRegister ? (
 						<FormControlLabel
+							onChange={() => setIsConfirmedTerms(prev => !prev)}
+							disabled={isPending}
 							control={<Checkbox />}
 							label={
 								<p className='authForm__terms'>
@@ -55,26 +88,39 @@ export const AuthForm = ({ type }: Props) => {
 							}
 						/>
 					) : (
-						<div className="authForm__controls">
+						<div className='authForm__controls'>
 							<FormControlLabel
+								name='isRemember'
+								disabled={isPending}
 								control={<Checkbox />}
 								label={
 									<p className='authForm__terms'>
 										Запомнить меня
 									</p>
 								}
-                                />
-                                <Link className="authForm__forgot" to={'/auth/reset-password'}>Забыли пароль?</Link>
+							/>
+							{/* TODO: ADD RESET PASSWORD FUNCTIONALITY */}
+							<Link
+								className='authForm__forgot'
+								to={"/auth/reset-password"}
+							>
+								Забыли пароль?
+							</Link>
 						</div>
 					)}
-					<button className="authForm__submit">{isRegister ? "Создать аккаунт" : "Войти"}</button>
+					<button
+						disabled={isPending || !isConfirmedTerms}
+						className='authForm__submit'
+					>
+						{isRegister ? "Создать аккаунт" : "Войти"}
+					</button>
 				</form>
 				{isRegister ? (
-					<p className="authForm__change">
+					<p className='authForm__change'>
 						Уже есть аккаунт? <Link to={"/auth/login"}>Вход</Link>
 					</p>
 				) : (
-					<p className="authForm__change">
+					<p className='authForm__change'>
 						Ещё нет аккаунта?{" "}
 						<Link to={"/auth/register"}>Регистрация</Link>
 					</p>

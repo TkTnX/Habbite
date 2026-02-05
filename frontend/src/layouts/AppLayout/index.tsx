@@ -1,12 +1,22 @@
+import { useEffect } from "react"
 import { Sidebar, UserPreview } from "../../components"
 import "./appLayout.scss"
-import { Outlet } from "react-router"
-
+import { Outlet, useNavigate } from "react-router"
+import Cookies from "js-cookie"
 export const AppLayout = () => {
+	const navigate = useNavigate()
+	useEffect(() => {
+		const token = Cookies.get("accessToken")
+
+		if (!token) {
+			navigate("/auth/login")
+		}
+	}, [navigate])
+
 	return (
 		<div className='appLayout'>
 			<Sidebar />
-			<div className="appLayout__main">
+			<div className='appLayout__main'>
 				<UserPreview />
 				<Outlet />
 			</div>

@@ -16,3 +16,8 @@ a {
 .css-196bwzp-MuiPaper-root-MuiCard-root {
 	background: var(--bg-color) !important;
 }
+
+button:disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}

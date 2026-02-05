@@ -11,24 +11,27 @@ export async function register(req, res) {
   const hashedPassword = await argon.hash(body.password);
 
   const newUser = await User.create({ ...body, password: hashedPassword });
-  if (!newUser) throw Error("Не удалось зарегистрироваться!");
+  console.log(newUser);
+  if (!newUser) throw err;
 
-  return auth(res, newUser);
+  return auth(res, newUser, true);
 }
 
 export async function login(req, res) {
-  const { email, password } = req.body;
+  const { email, password, isRemember } = req.body;
+
   const user = await User.findOne({ email });
   if (!user) throw Error("Неверные почта или пароль!");
+
   const isPasswordCorrect = await argon.verify(user.password, password);
   if (!isPasswordCorrect) throw Error("Неверные почта или пароль!");
 
-  return auth(res, user);
+  return auth(res, user, isRemember);
 }
 
 function generateTokens(user) {
   const payload = { userId: user._id, email: user.email };
-  
+
   const refreshToken = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
     algorithm: "HS256",
     expiresIn: "7d",
@@ -41,10 +44,16 @@ function generateTokens(user) {
   return { refreshToken, accessToken };
 }
 
-function auth(res, user) {
+function auth(res, user, isRemember) {
   const { accessToken, refreshToken } = generateTokens(user);
-
-  res.setHeader("Set-Cookie", `refreshToken=${refreshToken}`);
+  if (isRemember) {
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+  }
 
   return res.send({ accessToken });
 }
