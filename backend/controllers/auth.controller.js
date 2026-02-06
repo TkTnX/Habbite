@@ -44,16 +44,41 @@ function generateTokens(user) {
   return { refreshToken, accessToken };
 }
 
-function auth(res, user, isRemember) {
+function auth(res, user, isRemember = true) {
   const { accessToken, refreshToken } = generateTokens(user);
-  if (isRemember) {
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-  }
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   return res.send({ accessToken });
+}
+
+export async function refresh(req, res) {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken)
+      return res.status(401).json({ message: "No refresh token" });
+
+    const payload = jwt.verify(refreshToken, process.env.JWT_SECRET_KEY);
+
+    const user = await User.findById(payload.userId);
+
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    return auth(res, user, true);
+  } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Refresh token expired" });
+    }
+
+    return res.status(401).json({
+      message: "Invalid refresh token",
+    });
+  }
 }

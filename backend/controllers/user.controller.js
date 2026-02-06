@@ -2,13 +2,14 @@ import { User } from "../models/User.model.js";
 
 export async function getMe(req, res) {
   const payload = req.user;
-
-  const user = await User.findById(payload.userId).populate({
-    path: "userDrinks",
-    populate: {
-      path: "drink",
-    },
-  });
+  const user = await User.findById(payload.userId)
+    .select("-password")
+    .populate({
+      path: "userDrinks",
+      populate: {
+        path: "drink",
+      },
+    });
 
   if (!user) throw Error("Пользователь не найден");
 

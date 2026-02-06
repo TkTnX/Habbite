@@ -6,12 +6,14 @@ import UserRouter from "./routes/user.router.js";
 import DrinkRouter from "./routes/drink.router.js";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(cookieParser())
 app.use(
   cors({
     origin: process.env.CLIENT_URL,

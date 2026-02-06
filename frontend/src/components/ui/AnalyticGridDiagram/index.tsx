@@ -1,7 +1,9 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material"
 import "./analyticGridDiagram.scss"
 import { BarChart } from "@mui/x-charts"
-import { Plus } from "lucide-react"
+import { Plus, User } from "lucide-react"
+import { useUserStore } from "../../../shared/stores"
+import { getWeekDayIndex, sortUserDrinksByName } from "../../../shared"
 
 interface Props {
 	title: string
@@ -10,9 +12,17 @@ interface Props {
 }
 
 export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
+	const { user } = useUserStore()
 	const blueColor = getComputedStyle(document.documentElement)
 		.getPropertyValue("--color-blue")
 		.trim()
+	if (!user) return null
+	const drinksByName = sortUserDrinksByName(user.userDrinks)
+	const series = Object.entries(drinksByName).map(([drinkName, data]) => ({
+		label: drinkName,
+		data
+	}))
+
 	return (
 		<Card className='analyticGridDiagram' variant='outlined'>
 			<CardContent>
@@ -46,13 +56,7 @@ export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
 							height: 24
 						}
 					]}
-					series={[
-						{
-							id: "millilitres",
-							label: "Выпито",
-							data: [4000, 2000, 3000, 100, 3000]
-						}
-					]}
+					series={series}
 					height={250}
 					margin={{ left: 0, right: 0, top: 20, bottom: 0 }}
 					grid={{ horizontal: true }}

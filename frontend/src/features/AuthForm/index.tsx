@@ -23,8 +23,10 @@ interface Props {
 }
 
 export const AuthForm = ({ type, mutation }: Props) => {
-	const [isConfirmedTerms, setIsConfirmedTerms] = useState(false)
 	const isRegister = type === "register"
+	const [isConfirmedTerms, setIsConfirmedTerms] = useState(
+		isRegister ? false : true
+	)
 	const { mutate, isPending } = mutation()
 	const navigate = useNavigate()
 

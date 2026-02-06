@@ -1,17 +1,13 @@
 import { waterPeriod } from "../../shared"
+import { useUserStore } from "../../shared/stores"
 import { AnalyticGridDiagram, AnalyticRoundDiagram } from "../ui"
 import "./waterAnalytics.scss"
 
-// Drink types
-const drinkTypes = [
-	{ label: "Вода", value: 50000, color: "blue" },
-	{ label: "Кофе", value: 35000, color: "brown" },
-	{ label: "Чай", value: 10000, color: "yellow" },
-	{ label: "Лимонад", value: 5000, color: "orange" },
-	{ label: "Молоко", value: 5000, color: "gray" }
-]
 
 export const WaterAnalytics = () => {
+	const { user } = useUserStore()
+
+	if (!user) return null
 	return (
 		<section className='waterAnalytics'>
 			<h2 className='analytics__title'>Водяной анализ</h2>
@@ -22,7 +18,7 @@ export const WaterAnalytics = () => {
 					periods={waterPeriod}
 				/>
 				<AnalyticRoundDiagram
-					data={drinkTypes}
+					data={user.userDrinks}
 					title='Виды жидкостей'
 				/>
 			</div>

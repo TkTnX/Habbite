@@ -5,12 +5,13 @@ const userSchema = new Schema({
   lastName: String,
   email: { type: String, required: true, unique: true },
   avatar: String,
-  password: {type: String, min: 8},
-  provider: String,
+  password: { type: String, min: 8 },
+  provider: { type: String, required: true, default: "credentials" },
 
   weight: Number,
   weightGoal: Number,
   height: Number,
+  age: Number,
   gender: {
     type: String,
     enum: ["male", "female"],

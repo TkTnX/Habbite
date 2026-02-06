@@ -1,14 +1,25 @@
 import "./analyticRoundDiagram.scss"
 import { Card, CardContent, Stack, Typography } from "@mui/material"
 import { PieChart } from "@mui/x-charts"
+import { sortUserDrinksByName, type IUserDrink } from "../../../shared"
 interface Props {
 	title: string
 	description?: string
-	data: { label: string; value: number; color: string }[]
+	data: IUserDrink[]
 }
 
 export const AnalyticRoundDiagram = ({ title, description, data }: Props) => {
-	const totalDrunk = data.reduce((acc, item) => acc + item.value, 0)
+	const totalDrunk = data.reduce((acc, item) => acc + item.ml, 0)
+
+	const drinksByName = sortUserDrinksByName(data)
+	const pieData = Object.entries(drinksByName).map(
+		([name, values], index) => ({
+			id: index,
+			label: name,
+			value: values.reduce((sum, v) => sum + v, 0)
+		})
+	)
+
 	return (
 		<Card className='analyticRoundDiagram' variant='outlined'>
 			<CardContent>
@@ -30,7 +41,7 @@ export const AnalyticRoundDiagram = ({ title, description, data }: Props) => {
 				<PieChart
 					series={[
 						{
-							data,
+							data: pieData,
 							innerRadius: 75,
 							outerRadius: 100,
 							paddingAngle: 0,
