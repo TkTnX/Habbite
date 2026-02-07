@@ -46,12 +46,15 @@ function generateTokens(user) {
 
 function auth(res, user, isRemember = true) {
   const { accessToken, refreshToken } = generateTokens(user);
-  res.cookie("refreshToken", refreshToken, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+
+  if (isRemember) {
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+  }
 
   return res.send({ accessToken });
 }

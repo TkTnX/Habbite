@@ -3,12 +3,12 @@ import { createRoot } from "react-dom/client"
 import { createBrowserRouter } from "react-router"
 import { RouterProvider } from "react-router/dom"
 import "./shared/styles/index.scss"
-import { Homepage, LoginPage } from "./pages"
-import { AppLayout } from "./layouts"
+import { Homepage, LoginPage, StartPage } from "./pages"
+import { AppLayout, AuthLayout } from "./layouts"
 import { createTheme, ThemeProvider } from "@mui/material"
 import { RegisterPage } from "./pages/RegisterPage"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import {ToastContainer} from "react-toastify"
+import { ToastContainer } from "react-toastify"
 const router = createBrowserRouter([
 	{
 		element: <AppLayout />,
@@ -17,16 +17,25 @@ const router = createBrowserRouter([
 				index: true,
 				element: <Homepage />,
 				path: "/"
+			},
+			{
+				path: "/start",
+				element: <StartPage />
 			}
 		]
 	},
 	{
-		path: "/auth/login",
-		element: <LoginPage />
-	},
-	{
-		path: "/auth/register",
-		element: <RegisterPage />
+		element: <AuthLayout />,
+		children: [
+			{
+				path: "/auth/login",
+				element: <LoginPage />
+			},
+			{
+				path: "/auth/register",
+				element: <RegisterPage />
+			}
+		]
 	}
 ])
 

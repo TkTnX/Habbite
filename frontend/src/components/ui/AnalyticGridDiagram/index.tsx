@@ -1,9 +1,9 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material"
 import "./analyticGridDiagram.scss"
 import { BarChart } from "@mui/x-charts"
-import { Plus, User } from "lucide-react"
+import { Plus } from "lucide-react"
 import { useUserStore } from "../../../shared/stores"
-import { getWeekDayIndex, sortUserDrinksByName } from "../../../shared"
+import { sortUserDrinksByName } from "../../../shared"
 
 interface Props {
 	title: string
@@ -13,15 +13,17 @@ interface Props {
 
 export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
 	const { user } = useUserStore()
-	const blueColor = getComputedStyle(document.documentElement)
-		.getPropertyValue("--color-blue")
-		.trim()
+
 	if (!user) return null
 	const drinksByName = sortUserDrinksByName(user.userDrinks)
-	const series = Object.entries(drinksByName).map(([drinkName, data]) => ({
-		label: drinkName,
-		data
-	}))
+	const series = Object.entries(drinksByName).map(([drinkName, data]) => {
+		const drink = user.userDrinks.find(
+			userDrink => userDrink.drink.name === drinkName
+		)
+
+		return { label: drinkName, data, color: drink?.drink.color }
+	})
+
 
 	return (
 		<Card className='analyticGridDiagram' variant='outlined'>
@@ -47,7 +49,7 @@ export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
 
 				<BarChart
 					borderRadius={8}
-					colors={[blueColor]}
+					colors={user.userDrinks.flatMap(({ drink }) => drink.color)}
 					xAxis={[
 						{
 							scaleType: "band",

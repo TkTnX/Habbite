@@ -17,7 +17,29 @@ a {
 	background: var(--bg-color) !important;
 }
 
-button:disabled {
+button:disabled,
+input:disabled {
 	pointer-events: none;
 	opacity: 0.5;
+}
+
+.button {
+	border-radius: 40px;
+	background: var(--color-blue);
+	padding: 20px 0;
+	transition: all 0.2s ease-in;
+	width: 100%;
+	font-size: 18px;
+	margin-top: 24px;
+	color: #fff;
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }

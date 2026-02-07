@@ -22,8 +22,11 @@ export const AppLayout = () => {
 		if (!userData) return
 
 		setUser(userData.data)
+		if (Object.values(userData.data).includes(null)) {
+			navigate("/start")
+			return
+		}
 	}, [userData, userData?.data])
-	console.log(user)
 	return (
 		<div className='appLayout'>
 			<Sidebar />

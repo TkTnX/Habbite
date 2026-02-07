@@ -15,3 +15,11 @@ export interface IUser {
     height?: number
     age?: number
 }
+
+export interface IUpdateUser {
+    height: number
+    weight: number
+    weightGoal: number
+    gender: "male" | 'female'
+    birthday: string
+}

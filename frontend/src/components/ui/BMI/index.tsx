@@ -1,9 +1,13 @@
 import "./bmi.scss"
-import { BMI_GAPS, calculateBMIPosition } from "../../../shared"
+import { BMI_GAPS, calculateBMI, calculateBMIPosition } from "../../../shared"
 import { Tooltip } from "@mui/material"
+import { useUserStore } from "../../../shared/stores"
 export const BMI = () => {
-	const myTempBMI = 22
-	const { clampedBMI, BMIRange } = calculateBMIPosition(myTempBMI)
+	const { user } = useUserStore()
+	if (!user) return null
+
+	const BMI = calculateBMI(user.weight!, user.height!)
+	const { clampedBMI, BMIRange } = calculateBMIPosition(BMI)
 
 	return (
 		<div className='bmi'>
@@ -22,7 +26,7 @@ export const BMI = () => {
 					</Tooltip>
 				))}
 				<div className='bmi__marker' style={{ left: clampedBMI }}>
-					<p className='bmi__marker-num'>{myTempBMI}</p>
+					<p className='bmi__marker-num'>{BMI}</p>
 				</div>
 			</div>
 			<div className='bmi__info'>

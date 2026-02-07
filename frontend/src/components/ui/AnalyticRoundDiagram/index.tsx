@@ -29,10 +29,7 @@ export const AnalyticRoundDiagram = ({ title, description, data }: Props) => {
 							{title}
 						</Typography>
 						<Stack sx={{ justifyContent: "space-between" }}>
-							<Typography
-								variant='caption'
-								sx={{ color: "text.secondary" }}
-							>
+							<Typography variant='caption'>
 								{description}
 							</Typography>
 						</Stack>
