@@ -29,6 +29,11 @@ export async function login(req, res) {
   return auth(res, user, isRemember);
 }
 
+export async function logout(req, res) {
+  res.clearCookie("refreshToken");
+  return res.status(201).send({ ok: true });
+}
+
 function generateTokens(user) {
   const payload = { userId: user._id, email: user.email };
 

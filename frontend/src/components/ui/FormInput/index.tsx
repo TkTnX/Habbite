@@ -1,16 +1,17 @@
-import { FormControl, Input, InputLabel } from "@mui/material"
+import { FormControl, Input, InputLabel, type InputProps } from "@mui/material"
 
-interface Props {
-    disabled?: boolean
-    name: string
-    label:string
+interface Props extends InputProps {
+	disabled?: boolean
+	name: string
+	label: string
+	className?:string
 }
 
-export const FormInput = ({ disabled, name, label }: Props) => {
+export const FormInput = ({ disabled, className, name, label, ...props }: Props) => {
 	return (
-		<FormControl disabled={disabled}>
+		<FormControl className={className} disabled={disabled}>
 			<InputLabel htmlFor='firstName'>{label}</InputLabel>
-			<Input name={name} id={name} />
+			<Input name={name} id={name} {...props} />
 		</FormControl>
 	)
 }

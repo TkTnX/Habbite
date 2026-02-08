@@ -8,10 +8,10 @@ const userSchema = new Schema({
   password: { type: String, min: 8 },
   provider: { type: String, required: true, default: "credentials" },
 
-  weight: { type: Number, required: true, default: null },
-  weightGoal: { type: Number, required: true, default: null },
-  height: { type: Number, required: true, default: null },
-  birthday: { type: Date, required: true, default: null },
+  weight: { type: Number, default: null },
+  weightGoal: { type: Number, default: null },
+  height: { type: Number, default: null },
+  birthday: { type: Date, default: null },
   gender: {
     type: String,
     enum: ["male", "female"],

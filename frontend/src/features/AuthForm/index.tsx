@@ -74,6 +74,7 @@ export const AuthForm = ({ type, mutation }: Props) => {
 						label='Почта'
 					/>
 					<FormInput
+						type={"password"}
 						disabled={isPending}
 						name='password'
 						label='Пароль'

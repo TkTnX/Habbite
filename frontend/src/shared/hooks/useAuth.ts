@@ -29,5 +29,17 @@ export function useAuth() {
 			...options
 		})
 
-	return { registerMutation, loginMutation }
+	const logoutMutation = (
+		options?: Omit<
+			UseMutationOptions<unknown, unknown, void>,
+			"mutationKey" | "mutationFn"
+		>
+	) =>
+		useMutation({
+			mutationKey: ["logout"],
+			mutationFn: async () => await axiosInstance.post("auth/logout"),
+			...options
+		})
+
+	return { registerMutation, loginMutation, logoutMutation }
 }

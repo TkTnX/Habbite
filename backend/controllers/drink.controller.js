@@ -2,6 +2,15 @@ import { Drink } from "../models/Drink.model.js";
 import { User } from "../models/User.model.js";
 import { UserDrink } from "../models/UserDrink.model.js";
 
+export async function getDrinks(req, res) {
+  const drinks = await Drink.find()
+
+  if (!drinks) throw Error("Напитки не найдены!")
+  
+  return res.send(drinks)
+}
+
+
 export async function createDrink(req, res) {
   const body = req.body;
 

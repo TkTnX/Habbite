@@ -8,3 +8,8 @@ export interface IUserDrink {
 	createdAt: string
 	updatedAt: string
 }
+
+export interface IUserDrinkRequest {
+	ml: number
+	drink: string
+}
