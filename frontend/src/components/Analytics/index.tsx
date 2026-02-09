@@ -1,9 +1,6 @@
 import "./analytics.scss"
 import { AnalyticDiagram, AnalyticGridDiagram } from "../ui"
-import { waterPeriod, weightData } from "../../shared"
-
-
-
+import { waterPeriod } from "../../shared"
 
 export const Analytics = () => {
 	return (
@@ -14,7 +11,6 @@ export const Analytics = () => {
 					color='#f80d38'
 					title='Вес (кг)'
 					period='Последние 30 дней'
-					data={weightData}
 				/>
 				<AnalyticGridDiagram
 					periods={waterPeriod}

@@ -2,8 +2,13 @@ import { Tooltip } from "@mui/material"
 import { AnalyticDiagram, BMI } from "../ui"
 import "./weightAnalytics.scss"
 import { weightData } from "../../shared"
+import { useUserStore } from "../../shared/stores"
 
 export const WeightAnalytics = () => {
+	const { user } = useUserStore()
+
+	if (!user) return null
+
 	return (
 		<section className='weightAnalytics'>
 			<h2 className='analytics__title'>

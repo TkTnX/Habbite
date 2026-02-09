@@ -4,16 +4,18 @@ import mongoose from "mongoose";
 import AuthRouter from "./routes/auth.router.js";
 import UserRouter from "./routes/user.router.js";
 import DrinkRouter from "./routes/drink.router.js";
+import WeightRouter from "./routes/weight.router.js";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
+import "./models/Weight.model.js";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -33,6 +35,7 @@ app.listen(port, async (error) => {
 app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
 app.use("/drink", DrinkRouter);
+app.use("/weight", WeightRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Habbite API");

@@ -1,6 +1,7 @@
 export function getDaysInMonth() {
 	const now = new Date()
-	const date = new Date(now.getFullYear(), now.getMonth(), 0)
+	console.log(now.getMonth())
+	const date = new Date(now.getFullYear(), now.getMonth() + 1, 0)
 	const monthName = date.toLocaleDateString("ru-RU", {
 		month: "short"
 	})
@@ -12,5 +13,8 @@ export function getDaysInMonth() {
 		days.push(`${monthName} ${i}`)
 		i += 1
 	}
-	return days
+	return Array.from({ length: date.getDate() }, (_, i) => ({
+		label: `${monthName} ${i + 1}`,
+		day: i + 1
+	}))
 }

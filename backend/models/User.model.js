@@ -8,7 +8,6 @@ const userSchema = new Schema({
   password: { type: String, min: 8 },
   provider: { type: String, required: true, default: "credentials" },
 
-  weight: { type: Number, default: null },
   weightGoal: { type: Number, default: null },
   height: { type: Number, default: null },
   birthday: { type: Date, default: null },
@@ -17,6 +16,7 @@ const userSchema = new Schema({
     enum: ["male", "female"],
   },
   userDrinks: [{ type: Schema.Types.ObjectId, ref: "UserDrink" }],
+  weights: [{ type: Schema.Types.ObjectId, ref: "Weight" }],
 });
 
 export const User = model("User", userSchema);

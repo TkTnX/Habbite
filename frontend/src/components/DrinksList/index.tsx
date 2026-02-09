@@ -5,7 +5,7 @@ import { DrinkItem } from "../DrinkItem"
 
 interface Props {
 	onAddDrink: (id: string) => void
-	selectedDrink: string
+	selectedDrink: string | null
 }
 
 export const DrinksList = ({ onAddDrink, selectedDrink }: Props) => {

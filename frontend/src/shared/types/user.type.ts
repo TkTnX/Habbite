@@ -1,4 +1,4 @@
-import type { IUserDrink } from "."
+import type { IUserDrink, IWeight } from "."
 
 export interface IUser {
     _id: string,
@@ -10,7 +10,7 @@ export interface IUser {
     password: string,
     gender?: string
     userDrinks: IUserDrink[],
-    weight?: number
+    weights: IWeight[],
     weightGoal?: number
     height?: number
     age?: number

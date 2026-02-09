@@ -9,6 +9,12 @@ export async function getMe(req, res) {
       populate: {
         path: "drink",
       },
+    })
+    .populate({
+      path: "weights",
+      options: {
+        sort: { createdAt: -1 },
+      },
     });
 
   if (!user) throw Error("Пользователь не найден");
