@@ -33,8 +33,10 @@ export const AddWeightModal = ({ open, onClose }: Props) => {
 		const formData = new FormData(e.target)
 		const { weight } = Object.fromEntries(formData)
 		mutate(Number(weight), {
-			onSuccess: () =>
+			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["user"] })
+				onClose()
+			}
 		})
 	}
 
@@ -44,7 +46,7 @@ export const AddWeightModal = ({ open, onClose }: Props) => {
 				<h3 className='addUserDrinkModal__title'>Новый вес</h3>
 				<form onSubmit={onSubmit} className='addUserDrinkModal__form'>
 					<FormInput
-						defaultValue={user?.weights[0].weight}
+						defaultValue={user?.weights[0]?.weight}
 						disabled={isPending}
 						aria-valuemax={10000}
 						aria-valuemin={100}

@@ -1,6 +1,5 @@
 export function getDaysInMonth() {
 	const now = new Date()
-	console.log(now.getMonth())
 	const date = new Date(now.getFullYear(), now.getMonth() + 1, 0)
 	const monthName = date.toLocaleDateString("ru-RU", {
 		month: "short"

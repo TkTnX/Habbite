@@ -3,9 +3,9 @@ import "./analyticGridDiagram.scss"
 import { BarChart } from "@mui/x-charts"
 import { Plus } from "lucide-react"
 import { useUserStore } from "../../../shared/stores"
-import { sortUserDrinksByName } from "../../../shared"
 import { useState } from "react"
 import { AddUserDrinkModal } from "../../modals"
+import { sortUserDrinksByName } from "../../../shared"
 
 interface Props {
 	title: string
@@ -19,13 +19,12 @@ export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
 
 	if (!user) return null
 	const drinksByName = sortUserDrinksByName(user.userDrinks)
-	const series = Object.entries(drinksByName).map(([drinkName, data]) => {
-		const drink = user.userDrinks.find(
-			userDrink => userDrink.drink.name === drinkName
-		)
-
-		return { label: drinkName, data, color: drink?.drink.color }
-	})
+	const series = Object.entries(drinksByName).map(([name, data]) => ({
+		label: name,
+		data,
+		color: user.userDrinks.find(drink => drink.drink.name === name)?.drink
+			.color
+	}))
 
 	return (
 		<>

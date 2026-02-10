@@ -1,7 +1,6 @@
 import { Tooltip } from "@mui/material"
 import { AnalyticDiagram, BMI } from "../ui"
 import "./weightAnalytics.scss"
-import { weightData } from "../../shared"
 import { useUserStore } from "../../shared/stores"
 
 export const WeightAnalytics = () => {
@@ -27,7 +26,6 @@ export const WeightAnalytics = () => {
 					color='#f80d38'
 					title='Вес (кг)'
 					period='Последние 30 дней'
-					data={weightData}
 				/>
 			</div>
 		</section>

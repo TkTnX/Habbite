@@ -11,7 +11,6 @@ export async function register(req, res) {
   const hashedPassword = await argon.hash(body.password);
 
   const newUser = await User.create({ ...body, password: hashedPassword });
-  console.log(newUser);
   if (!newUser) throw err;
 
   return auth(res, newUser, true);

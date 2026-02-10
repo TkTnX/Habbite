@@ -6,11 +6,12 @@ export function sortUserDrinksByName(userDrinks: IUserDrink[]) {
 
 	userDrinks.forEach(({ drink, ml, createdAt }) => {
 		const dayIndex = getWeekDayIndex(createdAt)
+		if (dayIndex === -1) return
+
 		const drinkName = drink.name
 		if (!drinksByName[drinkName]) {
 			drinksByName[drinkName] = Array(7).fill(0)
 		}
-
 		drinksByName[drinkName][dayIndex] += ml
 	})
 

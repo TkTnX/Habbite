@@ -29,8 +29,6 @@ export const AnalyticDiagram = ({ title, period, color }: Props) => {
 			date.getFullYear() === now.getFullYear()
 		)
 	})
-
-	let lastValue: number | null = null
 	const weights = days.map(({ day }) => {
 		const weightForDay = monthWeights.find(w => {
 			const date = new Date(w.createdAt)
@@ -38,7 +36,6 @@ export const AnalyticDiagram = ({ title, period, color }: Props) => {
 		})
 
 		if (weightForDay) {
-			lastValue = weightForDay.weight
 			return weightForDay.weight
 		}
 
@@ -54,7 +51,10 @@ export const AnalyticDiagram = ({ title, period, color }: Props) => {
 							<Typography component='h3' gutterBottom>
 								{title}{" "}
 							</Typography>
-							<p>Настоящий вес: {user.weights[0].weight} кг</p>
+							<p>
+								Настоящий вес: {user.weights[0]?.weight || "-"}{" "}
+								кг
+							</p>
 							<Typography variant='caption'>{period}</Typography>
 						</div>
 						<button onClick={() => setOpenModal(true)}>
@@ -65,7 +65,8 @@ export const AnalyticDiagram = ({ title, period, color }: Props) => {
 						<SparkLineChart
 							height={250}
 							color={color}
-							data={weights}
+							// @ts-ignore
+							data={weights || []}
 							area
 							showTooltip
 							xAxis={{
