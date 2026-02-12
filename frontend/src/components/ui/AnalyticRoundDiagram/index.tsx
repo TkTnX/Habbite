@@ -1,14 +1,16 @@
 import "./analyticRoundDiagram.scss"
-import { Card, CardContent, Stack, Typography } from "@mui/material"
+import { Card, CardContent, Skeleton, Stack, Typography } from "@mui/material"
 import { PieChart } from "@mui/x-charts"
 import { sortUserDrinksByName, type IUserDrink } from "../../../shared"
 interface Props {
 	title: string
 	description?: string
-	data: IUserDrink[]
+	data?: IUserDrink[]
 }
 
 export const AnalyticRoundDiagram = ({ title, description, data }: Props) => {
+	if (!data) return <Skeleton width={"100%"} height={"350px"} />
+
 	const totalDrunk = data.reduce((acc, item) => acc + item.ml, 0)
 
 	const drinksByName = sortUserDrinksByName(data)

@@ -1,19 +1,19 @@
 import type { IUserDrink, IWeight } from "."
 
 export interface IUser {
-    _id: string,
-    avatar?: string
-    provider: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    gender?: string
-    userDrinks: IUserDrink[],
-    weights: IWeight[],
-    weightGoal?: number
-    height?: number
-    age?: number
+	_id: string
+	avatar?: string
+	provider: string
+	firstName: string
+	lastName: string
+	email: string
+	password: string
+	gender?: string
+	userDrinks: IUserDrink[]
+	weights: IWeight[]
+	weightGoal?: number
+	height?: number
+	birthday?: string
 }
 
 export interface IUpdateUser {
@@ -21,5 +21,9 @@ export interface IUpdateUser {
     weight: number
     weightGoal: number
     gender: "male" | 'female'
-    birthday: string
+	birthday: string
+	firstName: string
+	lastName: string
+	email: string
+	password?: string
 }

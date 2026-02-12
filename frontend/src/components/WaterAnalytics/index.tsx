@@ -7,7 +7,6 @@ import "./waterAnalytics.scss"
 export const WaterAnalytics = () => {
 	const { user } = useUserStore()
 
-	if (!user) return null
 	return (
 		<section className='waterAnalytics'>
 			<h2 className='analytics__title'>Водяной анализ</h2>
@@ -18,7 +17,7 @@ export const WaterAnalytics = () => {
 					periods={waterPeriod}
 				/>
 				<AnalyticRoundDiagram
-					data={user.userDrinks}
+					data={user?.userDrinks}
 					title='Виды жидкостей'
 				/>
 			</div>

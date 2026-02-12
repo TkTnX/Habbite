@@ -1,4 +1,4 @@
-import { Card, CardContent, Stack, Typography } from "@mui/material"
+import { Card, CardContent, Skeleton, Stack, Typography } from "@mui/material"
 import "./analyticGridDiagram.scss"
 import { BarChart } from "@mui/x-charts"
 import { Plus } from "lucide-react"
@@ -17,7 +17,8 @@ export const AnalyticGridDiagram = ({ title, description, periods }: Props) => {
 	const { user } = useUserStore()
 	const [openModal, setOpenModal] = useState(false)
 
-	if (!user) return null
+	if (!user) return <Skeleton width={"100%"} height={"350px"} />
+
 	const drinksByName = sortUserDrinksByName(user.userDrinks)
 	const series = Object.entries(drinksByName).map(([name, data]) => ({
 		label: name,

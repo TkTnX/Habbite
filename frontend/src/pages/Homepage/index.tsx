@@ -1,4 +1,4 @@
-import { Analytics, WaterAnalytics, WeightAnalytics } from "../../components"
+import { Analytics, BodyGoal, WaterAnalytics, WeightAnalytics } from "../../components"
 import { ThemeChange } from "../../features"
 import { useUserStore } from "../../shared/stores"
 import "./homepage.scss"
@@ -19,6 +19,7 @@ export const Homepage = () => {
 			<Analytics />
 			<WaterAnalytics />
 			<WeightAnalytics />
+			<BodyGoal />
 		</main>
 	)
 }

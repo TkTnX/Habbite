@@ -15,12 +15,17 @@ export function useUser() {
 				}),
 			enabled: !!accessToken
 		})
-	
-	
-	const updateUserMutation = () => useMutation({
-		mutationKey: ['update user'],
-		mutationFn: async (values: IUpdateUser) => await axiosInstance.patch('user', values) 
-	})
+
+	const updateUserMutation = () =>
+		useMutation({
+			mutationKey: ["update user"],
+			mutationFn: async (values: IUpdateUser | FormData) =>
+				await axiosInstance.patch("user", values, {
+					headers: {
+						"Content-Type": "multipart/form-data"
+					}
+				})
+		})
 
 	return { getMeQuery, updateUserMutation }
 }

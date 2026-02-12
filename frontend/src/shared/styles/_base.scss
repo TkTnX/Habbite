@@ -1,4 +1,5 @@
 @use "./vars";
+@use "./mixins";
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
 body {
@@ -7,6 +8,10 @@ body {
 	font-size: var(--font-size);
 	font-weight: var(--font-weight);
 	background: var(--bg-color);
+
+	@include mixins.md {
+		margin-bottom: 80px;
+	}
 }
 
 a {
@@ -51,4 +56,8 @@ select option {
 	color: red;
 	text-align: center;
 	margin-top: 20px;
+}
+
+.css-1mvk69b-MuiSkeleton-root {
+	-webkit-transform: unset !important;
 }

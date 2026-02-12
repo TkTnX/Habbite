@@ -1,0 +1,50 @@
+@use "../../shared/styles/mixins";
+
+.bodyGoal {
+	margin-top: 50px;
+
+	&__title {
+		text-align: center;
+		font-size: 28px;
+		font-weight: 600;
+	}
+
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 50px;
+
+		@include mixins.md {
+			flex-direction: column;
+		}
+	}
+
+	&__image {
+		max-width: unset;
+		width: 200px;
+	}
+
+	&__item {
+		font-size: 18px;
+
+		span {
+			display: inline-flex;
+			align-items: center;
+		}
+
+		&--active {
+			color: green;
+		}
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		max-width: 300px;
+		@include mixins.md {
+			max-width: unset;
+		}
+	}
+}

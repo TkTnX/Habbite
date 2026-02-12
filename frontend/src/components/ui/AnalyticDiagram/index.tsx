@@ -1,8 +1,6 @@
-import { Box, Card, CardContent, Typography } from "@mui/material"
+import { Box, Card, CardContent, Skeleton, Typography } from "@mui/material"
 import "./analyticDiagram.scss"
-import { areaElementClasses, SparkLineChart } from "@mui/x-charts"
-import { getDaysInMonth } from "../../../shared"
-import { AreaGradient } from "../AreaGradient"
+import { LineChart } from "@mui/x-charts"
 import { Plus } from "lucide-react"
 import { useUserStore } from "../../../shared/stores"
 import { useState } from "react"
@@ -11,35 +9,29 @@ import { AddWeightModal } from "../../modals"
 interface Props {
 	title: string
 	period: string
-	color: string
 }
 
-export const AnalyticDiagram = ({ title, period, color }: Props) => {
+export const AnalyticDiagram = ({ title, period }: Props) => {
 	const now = new Date()
 	const [openModal, setOpenModal] = useState(false)
 	const { user } = useUserStore()
-	const days = getDaysInMonth()
-	// TODO: В будущем выводить skeleton
-	if (!user) return null
+	if (!user) return <Skeleton width={"100%"} height={"350px"} />
 
-	const monthWeights = user.weights.filter(w => {
+	let monthWeights = user.weights.filter(w => {
 		const date = new Date(w.createdAt)
 		return (
 			date.getMonth() === now.getMonth() &&
 			date.getFullYear() === now.getFullYear()
 		)
 	})
-	const weights = days.map(({ day }) => {
-		const weightForDay = monthWeights.find(w => {
-			const date = new Date(w.createdAt)
-			return date.getDate() === day
-		})
 
-		if (weightForDay) {
-			return weightForDay.weight
-		}
+	const sortedMonthWeight = [...monthWeights].sort((a, b) => {
+		return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+	})
 
-		return null
+	const lables = sortedMonthWeight.map(w => {
+		const date = new Date(w.createdAt)
+		return date.getDate().toString()
 	})
 
 	return (
@@ -62,28 +54,26 @@ export const AnalyticDiagram = ({ title, period, color }: Props) => {
 						</button>
 					</div>
 					<Box>
-						<SparkLineChart
-							height={250}
-							color={color}
-							// @ts-ignore
-							data={weights || []}
-							area
-							showTooltip
-							xAxis={{
-								scaleType: "band",
-								data: days.map(d => d.label)
-							}}
-							sx={{
-								[`& .${areaElementClasses.root}`]: {
-									fill: "url(#area-gradient-weight)"
+						<LineChart
+							xAxis={[
+								{
+									scaleType: "point",
+									data: lables
 								}
-							}}
-						>
-							<AreaGradient
-								color={color}
-								id={"area-gradient-weight"}
-							/>
-						</SparkLineChart>
+							]}
+							series={[
+								{
+									data: sortedMonthWeight.map(
+										({ weight }) => weight
+									),
+									showMark: true
+								}
+							]}
+							height={250}
+							margin={{ left: 0, right: 0, top: 20, bottom: 0 }}
+							grid={{ horizontal: true }}
+							hideLegend
+						/>
 					</Box>
 				</CardContent>
 			</Card>

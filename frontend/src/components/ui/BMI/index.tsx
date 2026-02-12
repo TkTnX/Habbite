@@ -5,13 +5,13 @@ import {
 	calculateBMI,
 	calculateBMIPosition
 } from "../../../shared"
-import { Tooltip } from "@mui/material"
+import { Skeleton, Tooltip } from "@mui/material"
 import { useUserStore } from "../../../shared/stores"
 export const BMI = () => {
 	const { user } = useUserStore()
-	if (!user) return null
+	if (!user) return <Skeleton width={"100%"} height={"350px"} />
 
-	const BMI = calculateBMI(user.weight!, user.height!)
+	const BMI = calculateBMI(user.weights[0]?.weight!, user.height!)
 	const { clampedBMI, BMIRange } = calculateBMIPosition(BMI)
 
 	// TODO: Добавление userDrinks через client

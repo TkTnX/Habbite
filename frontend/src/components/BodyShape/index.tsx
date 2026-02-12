@@ -4,9 +4,10 @@ import "./bodyShape.scss"
 interface Props {
 	height: number
 	weight: number
+	className?:string
 }
 
-export const BodyShape = ({ height, weight }: Props) => {
+export const BodyShape = ({ height, weight, className }: Props) => {
 	const BMI = calculateBMI(weight, height)
 	let shapeIndex = 1
 	if (BMI < 18.5) {
@@ -22,7 +23,7 @@ export const BodyShape = ({ height, weight }: Props) => {
 	}
 
 	return (
-		<div className='bodyShape'>
+		<div className={`bodyShape ${className}`}>
 			<img src={`/images/shapes/${shapeIndex}.png`} alt='Форма тела' />
 		</div>
 	)

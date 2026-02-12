@@ -3,7 +3,13 @@ import { createRoot } from "react-dom/client"
 import { createBrowserRouter } from "react-router"
 import { RouterProvider } from "react-router/dom"
 import "./shared/styles/index.scss"
-import { Homepage, LoginPage, StartPage, LogoutPage } from "./pages"
+import {
+	Homepage,
+	LoginPage,
+	StartPage,
+	LogoutPage,
+	SettingsPage
+} from "./pages"
 import { AppLayout, AuthLayout } from "./layouts"
 import { createTheme, ThemeProvider } from "@mui/material"
 import { RegisterPage } from "./pages/RegisterPage"
@@ -23,8 +29,12 @@ const router = createBrowserRouter([
 				element: <StartPage />
 			},
 			{
-				path: '/logout',
+				path: "/logout",
 				element: <LogoutPage />
+			},
+			{
+				path: "/settings",
+				element: <SettingsPage />
 			}
 		]
 	},
