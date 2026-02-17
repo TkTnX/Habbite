@@ -12,3 +12,9 @@ export interface ILoginRequest {
 export interface IAuthResponse {
 	accessToken: string
 }
+
+
+export interface INewPasswordRequest {
+	token: string
+	password: string
+}

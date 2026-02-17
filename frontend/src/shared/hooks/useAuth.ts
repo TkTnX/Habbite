@@ -1,6 +1,11 @@
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query"
 import { axiosInstance } from "../lib"
-import type { AuthAxiosError, ILoginRequest, IRegisterRequest } from "../types"
+import type {
+	AuthAxiosError,
+	ILoginRequest,
+	INewPasswordRequest,
+	IRegisterRequest
+} from "../types"
 export function useAuth() {
 	const registerMutation = (
 		options?: Omit<
@@ -41,5 +46,47 @@ export function useAuth() {
 			...options
 		})
 
-	return { registerMutation, loginMutation, logoutMutation }
+	const sendResetPasswordEmailMutation = (
+		options?: Omit<
+			UseMutationOptions<unknown, AuthAxiosError, unknown>,
+			"mutationKey" | "mutationFn"
+		>
+	) =>
+		useMutation({
+			mutationKey: ["send reset password email"],
+			mutationFn: async (email: string) => {
+				const { data } = await axiosInstance.post("auth/send-email", {
+					email
+				})
+
+				return data
+			},
+			...options
+		})
+
+	const newPasswordMutation = (
+		options?: Omit<
+			UseMutationOptions<unknown, AuthAxiosError, unknown>,
+			"mutationKey" | "mutationFn"
+		>
+	) =>
+		useMutation({
+			mutationKey: ["set new password"],
+			mutationFn: async (body: INewPasswordRequest) => {
+				const { data } = await axiosInstance.patch(
+					"auth/new-password",
+					body
+				)
+				return data
+			},
+			...options
+		})
+
+	return {
+		registerMutation,
+		loginMutation,
+		logoutMutation,
+		sendResetPasswordEmailMutation,
+		newPasswordMutation
+	}
 }

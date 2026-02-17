@@ -113,7 +113,7 @@ export const AuthForm = ({ type, mutation }: Props) => {
 					)}
 					<button
 						disabled={isPending || !isConfirmedTerms}
-						className='authForm__submit'
+						className='button'
 					>
 						{isRegister ? "Создать аккаунт" : "Войти"}
 					</button>

@@ -33,7 +33,6 @@ export async function updateProfile(req, res) {
     avatar = `${process.env.SERVER_URL}/${destination}${filename}`;
   }
 
-  console.log(avatar);
 
   const user = await User.findById(payload.userId);
 

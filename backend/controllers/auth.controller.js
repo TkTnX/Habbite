@@ -2,8 +2,11 @@ import * as argon from "argon2";
 import { User } from "../models/User.model.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-
+import { Resend } from "resend";
+import * as crypto from "crypto";
+import { Token } from "../models/Token.model.js";
 dotenv.config();
+const resend = new Resend(process.env.RESEND_KEY);
 
 export async function register(req, res) {
   const body = req.body;
@@ -88,4 +91,57 @@ export async function refresh(req, res) {
       message: "Invalid refresh token",
     });
   }
+}
+
+export async function sendResetEmail(req, res) {
+  const now = new Date();
+  const { email } = req.body;
+
+  const token = crypto.randomBytes(32).toString("hex");
+
+  await Token.create({
+    token,
+    email,
+    expiresAt: now.setMinutes(now.getMinutes() + 15),
+  });
+
+  const { data, error } = await resend.emails.send({
+    from: "Acme <onboarding@resend.dev>",
+    to: email,
+    subject: "Восстановление пароля",
+    html: `
+    <h1>Восстановление пароля от аккаунта ${email}</h1>
+    <br />
+    <p>Похоже, вы забыли пароль. Чтобы изменить его <a href='${process.env.CLIENT_URL}/auth/new-password?token=${token}'>перейдите по ссылке.</a></p>
+    <br />
+    <b>Если это были не вы, проигнорируйте данное письмо!</b>
+    `,
+  });
+
+  if (error) return res.status(400).json({ error });
+
+  res.status(200).json({ data });
+}
+
+export async function newPassword(req, res) {
+  const { token, password } = req.body;
+
+  const isTokenExists = await Token.findOne({ token });
+
+  if (!isTokenExists)
+    return res.status(400).json({ message: "Токен не найден" });
+
+  if (isTokenExists.expiresAt < new Date())
+    res.status(400).json({ message: "Токен истёк" });
+
+  const hashedPassword = await argon.hash(password);
+
+  await User.updateOne(
+    { email: isTokenExists.email },
+    { password: hashedPassword },
+  );
+
+  await Token.deleteOne({ _id: isTokenExists._id });
+
+  res.status(200).json({ message: "Пароль успешно изменён!" });
 }

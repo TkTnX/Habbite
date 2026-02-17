@@ -8,7 +8,10 @@ import {
 	LoginPage,
 	StartPage,
 	LogoutPage,
-	SettingsPage
+	SettingsPage,
+	TasksPage,
+	ResetPasswordPage,
+	NewPasswordPage
 } from "./pages"
 import { AppLayout, AuthLayout } from "./layouts"
 import { createTheme, ThemeProvider } from "@mui/material"
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
 			{
 				path: "/settings",
 				element: <SettingsPage />
+			},
+			{
+				path: "/tasks",
+				element: <TasksPage />
 			}
 		]
 	},
@@ -48,6 +55,14 @@ const router = createBrowserRouter([
 			{
 				path: "/auth/register",
 				element: <RegisterPage />
+			},
+			{
+				path: "/auth/reset-password",
+				element: <ResetPasswordPage />
+			},
+			{
+				path: "/auth/new-password",
+				element: <NewPasswordPage />
 			}
 		]
 	}

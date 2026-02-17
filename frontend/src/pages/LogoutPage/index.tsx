@@ -38,7 +38,7 @@ export const LogoutPage = () => {
 					placeholder='test@example.com'
 				/>
 				<button disabled={!user} className='button logoutPage__submit'>
-					LOGOUT
+					Выйти
 				</button>
 			</form>
 		</div>

@@ -50,17 +50,6 @@
 		font-size: 12px;
 	}
 
-	&__submit {
-		border-radius: 40px;
-		background: var(--color-blue);
-		padding: 20px 0;
-		transition: all 0.2s ease-in;
-
-		&:hover {
-			opacity: 0.8;
-		}
-	}
-
 	&__change {
 		margin-top: 38px;
 		font-size: 12px;
@@ -69,11 +58,5 @@
 			text-decoration: underline;
 			color: var(--color-blue);
 		}
-	}
-}
-
-html[data-dark] {
-	.authForm__submit {
-		color: white;
 	}
 }
