@@ -4,7 +4,7 @@ import {
 	type UseMutationOptions
 } from "@tanstack/react-query"
 import { axiosInstance } from "../lib"
-import type { ICreateTaskRequest, ITask } from "../types"
+import type { ICreateTaskRequest, ITask, IUpdateTaskRequest } from "../types"
 
 export function useTasks() {
 	const getTasksQuery = () =>
@@ -32,5 +32,40 @@ export function useTasks() {
 			...options
 		})
 
-	return { getTasksQuery, createTaskMutation }
+	const changeTaskStatusMutation = () =>
+		useMutation({
+			mutationKey: ["change task status"],
+			mutationFn: async (taskId: string) => {
+				const { data } = await axiosInstance.patch(
+					`task/change-status/${taskId}`
+				)
+				return data
+			}
+		})
+
+	const updateTaskMutation = () =>
+		useMutation({
+			mutationKey: ["update task"],
+			mutationFn: async ({
+				body,
+				taskId
+			}: {
+				body: IUpdateTaskRequest
+				taskId: string
+			}) => {
+				const { data } = await axiosInstance.patch(
+					`task/${taskId}`,
+					body
+				)
+
+				return data
+			}
+		})
+
+	return {
+		getTasksQuery,
+		createTaskMutation,
+		changeTaskStatusMutation,
+		updateTaskMutation
+	}
 }

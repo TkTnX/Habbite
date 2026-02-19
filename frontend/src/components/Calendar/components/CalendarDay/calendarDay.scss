@@ -10,6 +10,8 @@
 }
 
 .calendar__task {
+	position: relative;
+	z-index: 10;
 	padding: 10px 20px;
 	border-radius: 20px;
 	margin-top: 5px;
@@ -17,7 +19,9 @@
 	width: 100%;
 	flex-shrink: 0;
 
-	display: -webkit-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3;
 	overflow: hidden;
@@ -26,4 +30,13 @@
 	max-height: calc(1.3em * 3);
 
 	word-break: break-word;
+
+	&--completed {
+		opacity: 0.5;
+	}
+
+	span {
+		  mix-blend-mode: difference;
+  color: white;
+	}
 }

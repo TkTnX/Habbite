@@ -4,3 +4,5 @@ export * from "./SettingsForm"
 export * from './ImageUpload'
 export * from './ResetPasswordForm'
 export * from './NewPasswordForm'
+export * from './ChangeTaskStatus'
+export * from './UpdateTaskButton'

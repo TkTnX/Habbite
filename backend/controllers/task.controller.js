@@ -27,3 +27,30 @@ export async function createTask(req, res) {
 
   return res.status(201).json(newTask);
 }
+
+export async function updateTask(req, res) {
+  const payload = req.user;
+  const taskId = req.params.id;
+  const body = req.body;
+
+  const task = await Task.findOne({ _id: taskId });
+  if (!task || String(task.user) !== payload.userId)
+    return res.status(404).json({ error: "Задача не найдена!" });
+
+  await Task.updateOne({ _id: task._id }, body);
+
+  return res.status(200).json({ error: "Задача изменена!" });
+}
+
+export async function changeTaskStatus(req, res) {
+  const payload = req.user;
+  const taskId = req.params.id;
+
+  const task = await Task.findOne({ _id: taskId });
+  if (!task || String(task.user) !== payload.userId)
+    return res.status(404).json({ error: "Задача не найдена!" });
+
+  await Task.updateOne({ _id: task._id }, { isCompleted: !task.isCompleted });
+
+  return res.status(200).json({ error: "Статус задачи изменён" });
+}
