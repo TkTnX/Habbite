@@ -22,7 +22,6 @@ export const BodyGoal = () => {
 			return index
 	})
 
-	console.log(BMIIndex)
 
 	return (
 		<section className='bodyGoal'>

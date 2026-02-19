@@ -14,8 +14,6 @@ export const BMI = () => {
 	const BMI = calculateBMI(user.weights[0]?.weight!, user.height!)
 	const { clampedBMI, BMIRange } = calculateBMIPosition(BMI)
 
-	// TODO: Добавление userDrinks через client
-
 	return (
 		<div className='bmi'>
 			<div className='bmi__line'>

@@ -5,6 +5,7 @@ import AuthRouter from "./routes/auth.router.js";
 import UserRouter from "./routes/user.router.js";
 import DrinkRouter from "./routes/drink.router.js";
 import WeightRouter from "./routes/weight.router.js";
+import TaskRouter from "./routes/task.router.js";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
@@ -37,6 +38,7 @@ app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
 app.use("/drink", DrinkRouter);
 app.use("/weight", WeightRouter);
+app.use('/task', TaskRouter)
 
 app.get("/", (req, res) => {
   res.send("Welcome to Habbite API");

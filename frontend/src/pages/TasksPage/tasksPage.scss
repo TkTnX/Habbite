@@ -1,0 +1,9 @@
+.tasks {
+	margin-top: 50px;
+
+	&__month {
+		color: var(--red-color);
+		font-weight: bold;
+		font-size: 24px;
+	}
+}

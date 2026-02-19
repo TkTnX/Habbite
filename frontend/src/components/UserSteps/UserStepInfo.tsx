@@ -25,7 +25,7 @@ export const UserStepInfo = ({ onNextStep }: Props) => {
 		const formData = new FormData(e.target)
 		const values = Object.fromEntries(formData) as unknown as IUpdateUser
 		mutate(values, {
-			onSuccess: data => {
+			onSuccess: () => {
 				onNextStep()
 			}
 		})

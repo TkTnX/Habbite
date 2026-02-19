@@ -102,7 +102,6 @@ export const AuthForm = ({ type, mutation }: Props) => {
 									</p>
 								}
 							/>
-							{/* TODO: ADD RESET PASSWORD FUNCTIONALITY */}
 							<Link
 								className='authForm__forgot'
 								to={"/auth/reset-password"}

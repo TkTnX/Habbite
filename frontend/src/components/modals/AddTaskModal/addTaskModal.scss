@@ -1,0 +1,25 @@
+.addTaskModal {
+	&__title {
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	&__form {
+		margin-top: 20px;
+		display: grid;
+		gap: 20px;
+	}
+
+	&__input {
+		width: 100%;
+		border-radius: 10px;
+	}
+
+	&__textarea {
+		width: 100%;
+		min-height: 200px;
+		border: 1px solid var(--color-blue);
+		border-radius: 10px;
+		padding: 10px;
+	}
+}
