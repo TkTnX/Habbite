@@ -10,7 +10,7 @@ export const Navbar = () => {
 				))}
 			</ul>
 			<div className='sidebar__account'>
-				<p className='sidebar__account-title'>ACCOUNT</p>
+				<p className='sidebar__account-title'>АККАУНТ</p>
 				<ul className='sidebar__list'>
 					{NAVBAR_ITEMS.slice(3).map(item => (
 						<NavbarItem item={item} />

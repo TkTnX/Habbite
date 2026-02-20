@@ -21,7 +21,11 @@ export const CalendarDay = ({ day, index, setOpenAddTask, tasks }: Props) => {
 		<>
 			<th
 				key={`${day.day}-${index}`}
-				className={`calendar__day ${!day.currentMonth && "calendar__day--other"} ${currDate === day.day && "calendar__day--today"} ${(index === 5 || index === 6) && "calendar__day--weekend"} ${day.day < now.getDate() && "calendar__day--gone"}`}
+				className={`calendar__day 
+					${!day.currentMonth && "calendar__day--other"} 
+				${currDate === day.day && "calendar__day--today"} 
+				${(index === 5 || index === 6) && "calendar__day--weekend"} 
+				${day.day < now.getDate() && "calendar__day--gone"}`}
 			>
 				<button
 					className='calendar__day-button'

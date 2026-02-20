@@ -1,7 +1,12 @@
 import "./taskModal.scss"
 import { Box, Modal } from "@mui/material"
 import type { ITask } from "../../../shared"
-import { ChangeTaskStatus, UpdateTaskButton } from "../../../features"
+import {
+	ChangeTaskStatus,
+	DeleteTaskButton,
+	UpdateTaskButton
+} from "../../../features"
+import { Trash } from "lucide-react"
 
 const style = {
 	position: "absolute",
@@ -27,9 +32,12 @@ export const TaskModal = ({ open, onClose, task }: Props) => {
 			<Box sx={style}>
 				<h3 className='taskModal__title'>{task.title}</h3>
 				<p className='taskModal__text'>{task.text}</p>
+				<DeleteTaskButton onClose={onClose} taskId={task._id} />
 				<div className='taskModal__buttons'>
 					<ChangeTaskStatus onClose={onClose} task={task} />
-					{!task.isCompleted && <UpdateTaskButton onClose={onClose} task={task} />}
+					{!task.isCompleted && (
+						<UpdateTaskButton onClose={onClose} task={task} />
+					)}
 				</div>
 			</Box>
 		</Modal>

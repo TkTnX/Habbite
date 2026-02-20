@@ -62,10 +62,20 @@ export function useTasks() {
 			}
 		})
 
+	const deleteTaskMutation = () =>
+		useMutation({
+			mutationKey: ["delete task"],
+			mutationFn: async (taskId: string) => {
+				const { data } = await axiosInstance.delete(`task/${taskId}`)
+				return data
+			}
+		})
+
 	return {
 		getTasksQuery,
 		createTaskMutation,
 		changeTaskStatusMutation,
-		updateTaskMutation
+		updateTaskMutation,
+		deleteTaskMutation
 	}
 }

@@ -1,5 +1,11 @@
-import { Analytics, BodyGoal, WaterAnalytics, WeightAnalytics } from "../../components"
+import {
+	Analytics,
+	BodyGoal,
+	WaterAnalytics,
+	WeightAnalytics
+} from "../../components"
 import { ThemeChange } from "../../features"
+import { getTimeLabel } from "../../shared"
 import { useUserStore } from "../../shared/stores"
 import "./homepage.scss"
 export const Homepage = () => {
@@ -10,9 +16,9 @@ export const Homepage = () => {
 			<div className='homepage__top'>
 				<div>
 					<p className='homepage__welcome'>
-						Добрый день, {user?.firstName}
+						{getTimeLabel()}, {user?.firstName}
 					</p>
-					<p>Как вы сегодня?</p>
+					<p>Как вы чувствуете себя сегодня?</p>
 				</div>
 				<ThemeChange />
 			</div>

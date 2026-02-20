@@ -33,7 +33,7 @@
 // COMPONENTS
 
 @mixin sidebar-closed {
-	width: 90px;
+	min-width: 90px;
 
 	.sidebar__top {
 		flex-direction: column;

@@ -6,7 +6,6 @@ import { useTasks } from "../../shared/hooks"
 
 import { CalendarDay } from "./components/CalendarDay"
 
-/* TODO: Добавить border radius для таблицы */
 
 export const Calendar = () => {
 	const { getTasksQuery } = useTasks()
@@ -21,49 +20,51 @@ export const Calendar = () => {
 
 	return (
 		<>
-			<table className='calendar'>
-				<thead className='calendar__header'>
-					<tr className='calendar__tr'>
-						<th scope='col' className='calendar__tr-col'>
-							Понедельник
-						</th>
-						<th scope='col' className='calendar__tr-col'>
-							Вторник
-						</th>
-						<th scope='col' className='calendar__tr-col'>
-							Среда
-						</th>
-						<th scope='col' className='calendar__tr-col'>
-							Четверг
-						</th>
-						<th scope='col' className='calendar__tr-col'>
-							Пятница
-						</th>
-						<th scope='col' className='calendar__tr-col'>
-							Суббота
-						</th>
-						<th scope='col' className='calendar__tr-col'>
-							Воскресенье
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{weeks.map(week => (
+			<div className='calendarWrapper'>
+				<table className='calendar'>
+					<thead className='calendar__header'>
 						<tr className='calendar__tr'>
-							{week.map((day, index) => (
-								<CalendarDay
-									tasks={tasks?.filter(
-										task => task.date === day.label
-									)}
-									day={day as ICalendarDay}
-									index={index}
-									setOpenAddTask={setOpenAddTask}
-								/>
-							))}
+							<th scope='col' className='calendar__tr-col'>
+								Понедельник
+							</th>
+							<th scope='col' className='calendar__tr-col'>
+								Вторник
+							</th>
+							<th scope='col' className='calendar__tr-col'>
+								Среда
+							</th>
+							<th scope='col' className='calendar__tr-col'>
+								Четверг
+							</th>
+							<th scope='col' className='calendar__tr-col'>
+								Пятница
+							</th>
+							<th scope='col' className='calendar__tr-col'>
+								Суббота
+							</th>
+							<th scope='col' className='calendar__tr-col'>
+								Воскресенье
+							</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{weeks.map((week, index) => (
+							<tr key={index} className='calendar__tr'>
+								{week.map((day, index) => (
+									<CalendarDay
+										tasks={tasks?.filter(
+											task => task.date === day.label
+										)}
+										day={day as ICalendarDay}
+										index={index}
+										setOpenAddTask={setOpenAddTask}
+									/>
+								))}
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 			<AddTaskModal
 				date={openAddTask?.label!}
 				open={!!openAddTask}

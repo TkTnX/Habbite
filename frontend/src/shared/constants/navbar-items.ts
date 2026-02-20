@@ -9,11 +9,7 @@ export const NAVBAR_ITEMS = [
 		name: "Задачи",
 		icon: "/images/icons/tasks.svg"
 	},
-	{
-		link: "/health",
-		name: "Здоровье",
-		icon: "/images/icons/health.svg"
-	},
+
 	{
 		link: "/settings",
 		name: "Настройки",
@@ -23,5 +19,5 @@ export const NAVBAR_ITEMS = [
 		link: "/logout",
 		name: "Выйти",
 		icon: "/images/icons/logout.svg"
-	},
+	}
 ]

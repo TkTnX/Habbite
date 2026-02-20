@@ -1,6 +1,13 @@
-.calendar {
-	margin-top: 20px;
+.calendarWrapper {
 	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.calendar {
+	width: 100%;
+	min-width: 980px;
+	margin-top: 20px;
 	border-collapse: collapse;
 
 	&__tr {
@@ -9,7 +16,6 @@
 			font-weight: 400;
 			padding: 20px 0;
 			border: 1px solid #e7e7e7;
-			flex: 1;
 
 			&:first-child {
 				border-radius: 15px 0 0 0;
@@ -31,8 +37,6 @@
 		&--other {
 			opacity: 0.4;
 		}
-
-	
 
 		&--today {
 			background: #cafcbb;
